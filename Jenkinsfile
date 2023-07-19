@@ -6,6 +6,10 @@ pipeline {
             reuseNode 'true'
          }    
        }
+       environment {
+        SONAR_SCANER = '/opt/sonar/sonar-scanner-4.8.0.2856-linux/bin'
+       }
+
   stages {
     stage('Checkout') {
       steps {
@@ -17,7 +21,7 @@ pipeline {
       steps{
           //sonarscanner
                   withSonarQubeEnv('sonar-scanner') {
-          sh "/opt/sonar/sonar-scanner-4.8.0.2856-linux/bin/sonar-scanner"
+          sh "${SONAR_SCANER}/sonar-scanner"
            }
       }
     }
